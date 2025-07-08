@@ -3,21 +3,26 @@ let computerScore = 0;
 let rounds = 0;
 let roundsPlayed = 0;
 
+const rock_btn = document.getElementById("rock");
+const paper_btn = document.getElementById("paper");
+const scissors_btn = document.getElementById("scissors");
+const computer_score = document.getElementById("computer-score");
+const player_score = document.getElementById("player-score");
+const message = document.getElementById("message");
+
+
+
+
 function getComputerChoice() {
     let choices = ['rock', 'paper', 'scissors'];
     let randomIndex = Math.floor(Math.random() * choices.length);
+    console.log('computer choice: ' + choices[randomIndex]);
     return choices[randomIndex];
 }
 
-function getHumanChoice() {
-    let choice = prompt("Enter rock, paper, or scissors:", "rock, paper, scissors").toLowerCase();
-    return choice;
-}
 
 function playRound(computerChoice, humanChoice) {
-    console.log("Computer: " + computerChoice);
-    console.log("You: " + humanChoice);
-
+    console.log('player choice: ' + humanChoice);
     if (computerChoice === humanChoice) {
         console.log("It's a tie!");
     }
@@ -31,21 +36,12 @@ function playRound(computerChoice, humanChoice) {
         computerScore++;
         console.log("You lost!");
     }
+
+    computer_score.textContent = computerScore;
+    player_score.textContent = humanScore;
+
 }
 
-function playGame(){
-    rounds = prompt("How many rounds would you like to play?");
-    for (let i = 0; i < rounds; i++) {
-        playRound(getComputerChoice(), getHumanChoice());
-    }
-
-    if (humanScore > computerScore) {
-        console.log("You are the winner after " + rounds + " rounds!");
-    }
-    else{
-        console.log("You lost the game after " + rounds + " rounds!");
-    }
-    console.log("Computer: " + computerScore + " You: " + humanScore);
-}
-
-playGame();
+rock_btn.addEventListener("click", function(){playRound(getComputerChoice(), "rock")});
+paper_btn.addEventListener("click", function(){playRound(getComputerChoice(), "paper")});
+scissors_btn.addEventListener("click", function(){playRound(getComputerChoice(), "scissors")});
