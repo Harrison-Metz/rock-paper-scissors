@@ -9,6 +9,7 @@ const scissors_btn = document.getElementById("scissors");
 const computer_score = document.getElementById("computer-score");
 const player_score = document.getElementById("player-score");
 const message = document.getElementById("message");
+const outcome = document.getElementById("outcome");
 
 
 
@@ -24,22 +25,22 @@ function getComputerChoice() {
 function playRound(computerChoice, humanChoice) {
     console.log('player choice: ' + humanChoice);
     if (computerChoice === humanChoice) {
-        console.log("It's a tie!");
+        outcome.textContent = "It's a tie!";
     }
     else if (humanChoice === "rock" && computerChoice === "scissors" ||
         humanChoice === "paper" && computerChoice === "rock" ||
         humanChoice === "scissors" && computerChoice === "paper") {
             humanScore++;
-            console.log("You won!");
+            outcome.textContent = "You won!";
     }
     else{
         computerScore++;
-        console.log("You lost!");
+        outcome.textContent = "You lost!";
     }
 
     computer_score.textContent = computerScore;
     player_score.textContent = humanScore;
-
+    message.textContent = "COMPUTER: " + computerChoice + " YOU: " + humanChoice
 }
 
 rock_btn.addEventListener("click", function(){playRound(getComputerChoice(), "rock")});
